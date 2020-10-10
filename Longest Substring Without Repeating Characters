@@ -1,0 +1,45 @@
+3. Longest Substring Without Repeating Characters
+
+Given a string s, find the length of the longest substring without repeating characters.
+
+//Solution(C++)   //Using  Map
+
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.length()<2)
+            return s.length();
+        map<char,int> m;
+        int res=1,count=0,startpos=-1,prevpos;
+        for(int i=0;i<s.length();i++)
+        {
+            if(m.find(s[i])==m.end())
+            {
+                m.insert({s[i],i});
+                count++;
+                res=max(res,count);
+            }
+            else
+            {
+                prevpos=m.find(s[i])->second;
+                m.find(s[i])->second=i;
+                if(prevpos>startpos)
+                {
+                    count=i-prevpos;
+                    startpos=prevpos+1;
+                }
+                else if(prevpos<startpos)
+                {
+                    count++;
+                    res=max(res,count);
+                }
+            }
+        }
+        return res;
+    }
+};
+
+----------------------------------------------------------------
+
+Runtime 40ms
