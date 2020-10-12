@@ -1,0 +1,72 @@
+5. 
+
+Given a string s, return the longest palindromic substring in s.
+
+//Solution(C++)
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int l=s.length();
+        if(s.length()<2) 
+            return s;
+        int i,j;
+        int arr[2]={0,0};
+            
+        int longest=1;
+        for(int k=0;k<l-1;k++)                       //For even palindromes
+            {
+                i=k;
+                j=k+1;
+                while(i>=0 && j<s.length())
+                {
+                    if(s[i]==s[j])
+                    {
+                        i--;
+                        j++;
+                    }
+                    else
+                        break;
+                }
+                i++;
+                j--;
+                if(j-i+1>longest)
+                {
+                    arr[0]=i;
+                    arr[1]=j;
+                    longest=j-i+1;
+                }
+            }
+        
+            for(int k=0;k<l;k++)                         //For odd palindromes
+            {
+                i=k;
+                j=k;
+                while(i>=0 && j<s.length())
+                {
+                    if(s[i]==s[j])
+                    {
+                        i--;
+                        j++;
+                    }
+                    else
+                        break;
+                }
+                i++;
+                j--;
+                if(j-i+1>longest)
+                {
+                    arr[0]=i;
+                    arr[1]=j;
+                    longest=j-i+1;
+                }
+            }
+            
+        string s1=s.substr(arr[0],arr[1]-arr[0]+1);
+        return s1;
+    }
+};
+
+-----------------------------------------------------------------------------------
+
+Runtime 32ms
