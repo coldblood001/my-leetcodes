@@ -1,0 +1,36 @@
+9. Palindrome Number
+
+Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
+
+Follow up: Could you solve it without converting the integer to a string?
+
+ 
+ 
+ //Solution (C++)  //Without String Strategy
+ 
+ class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0)
+            return false;
+        
+        int n=x,a;
+        long res=0;
+        while(n>0)
+        {
+            a=n%10;
+            n/=10;
+            res=res*10+a;
+            if(res>INT_MAX)
+                return false;
+        }
+        if(res==x)
+            return true;
+        else
+            return false;
+    }
+};
+
+-----------------------------------------------
+
+Runtime 8ms
